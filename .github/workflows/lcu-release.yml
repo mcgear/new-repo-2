@@ -139,14 +139,14 @@ jobs:
 
       # bump version and push tag
       - name: Bump version and push tag
-        id: versionBump
         uses: fathym/github-tag-action@master
-        if: ${{ steps.package_json_exists.outputs.files_exists == 'true' }}
+        id: versionBumpTag
         env:
           DEFAULT_BUMP: ${{ steps.vars.outputs.versionBump }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_BRANCHES: .*
           WITH_V: false
+          DRY_RUN: false
       - run: echo "New version is ${{ steps.versionBump.outputs.new_tag }}"
 
       # webhook to LowCodeUnit
